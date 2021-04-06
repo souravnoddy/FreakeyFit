@@ -15,135 +15,135 @@ import java.util.Map;
 @Slf4j
 public class ClientRequestAdaptor {
 
-  public static final int CONNECT_TIMEOUT = 30000;
+    public static final int CONNECT_TIMEOUT = 30000;
 
-  public <T, U> ResponseEntity<T> postApiResponse(
-      String baseUrl, U requestBody, Class<T> serviceResponse, Map<String, String> requestHeaders) {
-    RestTemplate restTemplate = new RestTemplate();
-    restTemplate
-        .getMessageConverters()
-        .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-    HttpComponentsClientHttpRequestFactory requestFactory =
-        new HttpComponentsClientHttpRequestFactory();
-    requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
-    requestFactory.setReadTimeout(CONNECT_TIMEOUT);
+    public <T, U> ResponseEntity<T> postApiResponse(
+            String baseUrl, U requestBody, Class<T> serviceResponse, Map<String, String> requestHeaders) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate
+                .getMessageConverters()
+                .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        HttpComponentsClientHttpRequestFactory requestFactory =
+                new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
+        requestFactory.setReadTimeout(CONNECT_TIMEOUT);
 
-    restTemplate.setRequestFactory(requestFactory);
+        restTemplate.setRequestFactory(requestFactory);
 
-    HttpHeaders headers = new HttpHeaders();
-    requestHeaders.forEach(headers::set);
+        HttpHeaders headers = new HttpHeaders();
+        requestHeaders.forEach(headers::set);
 
-    HttpEntity<?> requestEntity = new HttpEntity<>(requestBody, headers);
+        HttpEntity<?> requestEntity = new HttpEntity<>(requestBody, headers);
 
-    ResponseEntity<T> response = null;
-    try {
-      log.info("Calling POST {} ", baseUrl);
-      response = restTemplate.postForEntity(baseUrl, requestEntity, serviceResponse);
-    } catch (Exception e) {
-      return handleException(e, headers);
+        ResponseEntity<T> response = null;
+        try {
+            log.info("Calling POST {} ", baseUrl);
+            response = restTemplate.postForEntity(baseUrl, requestEntity, serviceResponse);
+        } catch (Exception e) {
+            return handleException(e, headers);
+        }
+
+        return response;
     }
 
-    return response;
-  }
+    public <T> ResponseEntity<T> getApiResponse(
+            String apiUrl, Class<T> serviceResponse, Map<String, String> requestHeaders) {
 
-  public <T> ResponseEntity<T> getApiResponse(
-      String apiUrl, Class<T> serviceResponse, Map<String, String> requestHeaders) {
+        RestTemplate restTemplate = new RestTemplate();
 
-    RestTemplate restTemplate = new RestTemplate();
+        HttpComponentsClientHttpRequestFactory requestFactory =
+                new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
+        requestFactory.setReadTimeout(CONNECT_TIMEOUT);
 
-    HttpComponentsClientHttpRequestFactory requestFactory =
-        new HttpComponentsClientHttpRequestFactory();
-    requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
-    requestFactory.setReadTimeout(CONNECT_TIMEOUT);
+        restTemplate.setRequestFactory(requestFactory);
 
-    restTemplate.setRequestFactory(requestFactory);
+        HttpHeaders headers = new HttpHeaders();
+        requestHeaders.forEach(headers::set);
 
-    HttpHeaders headers = new HttpHeaders();
-    requestHeaders.forEach(headers::set);
+        HttpEntity<?> requestEntity = new HttpEntity<>(headers);
 
-    HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+        ResponseEntity<T> response = null;
 
-    ResponseEntity<T> response = null;
+        try {
+            log.info("Calling GET {} ", apiUrl);
+            response = restTemplate.exchange(apiUrl, HttpMethod.GET, requestEntity, serviceResponse);
+        } catch (Exception e) {
 
-    try {
-      log.info("Calling GET {} ", apiUrl);
-      response = restTemplate.exchange(apiUrl, HttpMethod.GET, requestEntity, serviceResponse);
-    } catch (Exception e) {
+            return handleException(e, headers);
+        }
 
-      return handleException(e, headers);
+        return response;
     }
 
-    return response;
-  }
+    public <T, U> ResponseEntity<T> deleteApiResponse(
+            String baseUrl, U requestBody, Class<T> serviceResponse, Map<String, String> requestHeaders) {
 
-  public <T, U> ResponseEntity<T> deleteApiResponse(
-      String baseUrl, U requestBody, Class<T> serviceResponse, Map<String, String> requestHeaders) {
+        RestTemplate restTemplate = new RestTemplate();
 
-    RestTemplate restTemplate = new RestTemplate();
+        HttpComponentsClientHttpRequestFactory requestFactory =
+                new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
+        requestFactory.setReadTimeout(CONNECT_TIMEOUT);
 
-    HttpComponentsClientHttpRequestFactory requestFactory =
-        new HttpComponentsClientHttpRequestFactory();
-    requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
-    requestFactory.setReadTimeout(CONNECT_TIMEOUT);
+        restTemplate.setRequestFactory(requestFactory);
+        HttpHeaders headers = new HttpHeaders();
+        requestHeaders.forEach(headers::set);
 
-    restTemplate.setRequestFactory(requestFactory);
-    HttpHeaders headers = new HttpHeaders();
-    requestHeaders.forEach(headers::set);
+        HttpEntity<?> requestEntity = new HttpEntity<>(requestBody, headers);
 
-    HttpEntity<?> requestEntity = new HttpEntity<>(requestBody, headers);
+        ResponseEntity<T> response = null;
+        try {
+            log.info("Calling DELETE {} ", baseUrl);
+            response = restTemplate.exchange(baseUrl, HttpMethod.DELETE, requestEntity, serviceResponse);
+        } catch (Exception e) {
+            return handleException(e, headers);
+        }
 
-    ResponseEntity<T> response = null;
-    try {
-      log.info("Calling DELETE {} ", baseUrl);
-      response = restTemplate.exchange(baseUrl, HttpMethod.DELETE, requestEntity, serviceResponse);
-    } catch (Exception e) {
-      return handleException(e, headers);
+        return response;
     }
 
-    return response;
-  }
+    public <T, U> ResponseEntity<T> patchApiResponse(
+            String baseUrl, U requestBody, Class<T> serviceResponse, Map<String, String> requestHeaders) {
 
-  public <T, U> ResponseEntity<T> patchApiResponse(
-      String baseUrl, U requestBody, Class<T> serviceResponse, Map<String, String> requestHeaders) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate
+                .getMessageConverters()
+                .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        HttpComponentsClientHttpRequestFactory requestFactory =
+                new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
+        requestFactory.setReadTimeout(CONNECT_TIMEOUT);
 
-    RestTemplate restTemplate = new RestTemplate();
-    restTemplate
-        .getMessageConverters()
-        .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-    HttpComponentsClientHttpRequestFactory requestFactory =
-        new HttpComponentsClientHttpRequestFactory();
-    requestFactory.setConnectTimeout(CONNECT_TIMEOUT);
-    requestFactory.setReadTimeout(CONNECT_TIMEOUT);
+        restTemplate.setRequestFactory(requestFactory);
+        HttpHeaders headers = new HttpHeaders();
+        requestHeaders.forEach(headers::set);
 
-    restTemplate.setRequestFactory(requestFactory);
-    HttpHeaders headers = new HttpHeaders();
-    requestHeaders.forEach(headers::set);
+        HttpEntity<?> requestEntity = new HttpEntity<>(requestBody, headers);
 
-    HttpEntity<?> requestEntity = new HttpEntity<>(requestBody, headers);
+        ResponseEntity<T> response = null;
+        try {
+            log.info("Calling PATCH {} ", baseUrl);
+            response = restTemplate.exchange(baseUrl, HttpMethod.PATCH, requestEntity, serviceResponse);
+        } catch (Exception e) {
+            return handleException(e, headers);
+        }
 
-    ResponseEntity<T> response = null;
-    try {
-      log.info("Calling PATCH {} ", baseUrl);
-      response = restTemplate.exchange(baseUrl, HttpMethod.PATCH, requestEntity, serviceResponse);
-    } catch (Exception e) {
-      return handleException(e, headers);
+        return response;
     }
 
-    return response;
-  }
+    private <T> ResponseEntity<T> handleException(Exception e, HttpHeaders httpHeaders) {
 
-  private <T> ResponseEntity<T> handleException(Exception e, HttpHeaders httpHeaders) {
+        log.error("Error in Http Client Adapter for Trace Id {}", httpHeaders.get("TraceId"), e);
 
-    log.error("Error in Http Client Adapter for Trace Id {}", httpHeaders.get("TraceId"), e);
-
-    if (e instanceof HttpClientErrorException.Unauthorized) {
-      return new ResponseEntity<T>(HttpStatus.UNAUTHORIZED);
-    } else if (e instanceof HttpClientErrorException.Forbidden) {
-      return new ResponseEntity<T>(HttpStatus.FORBIDDEN);
-    } else if (e instanceof HttpClientErrorException.BadRequest) {
-      return new ResponseEntity<T>(HttpStatus.BAD_REQUEST);
-    } else {
-      return new ResponseEntity<T>(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (e instanceof HttpClientErrorException.Unauthorized) {
+            return new ResponseEntity<T>(HttpStatus.UNAUTHORIZED);
+        } else if (e instanceof HttpClientErrorException.Forbidden) {
+            return new ResponseEntity<T>(HttpStatus.FORBIDDEN);
+        } else if (e instanceof HttpClientErrorException.BadRequest) {
+            return new ResponseEntity<T>(HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<T>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-  }
 }

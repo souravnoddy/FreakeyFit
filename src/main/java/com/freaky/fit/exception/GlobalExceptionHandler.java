@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.Date;
+
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -29,9 +30,9 @@ public class GlobalExceptionHandler {
             }
             return handleException(((BusinessException) ex).getErrorStatus(), ex.getMessage(), request);
         } else {
-                log.error("P3|Error Code 500|{}", StackTraceUtil.getStackTrace(ex));
-                return handleException(
-                        HttpStatus.INTERNAL_SERVER_ERROR, StackTraceUtil.getStackTrace(ex), request);
+            log.error("P3|Error Code 500|{}", StackTraceUtil.getStackTrace(ex));
+            return handleException(
+                    HttpStatus.INTERNAL_SERVER_ERROR, StackTraceUtil.getStackTrace(ex), request);
 
         }
     }

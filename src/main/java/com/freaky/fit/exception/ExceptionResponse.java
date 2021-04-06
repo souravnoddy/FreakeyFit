@@ -9,11 +9,11 @@ import lombok.ToString;
 @Data
 @ToString
 public class ExceptionResponse {
-  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
-  private String timestamp;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
+    private String timestamp;
 
-  private String message;
-  private String details;
-  private String httpCodeMessage;
-  private String traceId;
+    private String message;
+    private String details;
+    private String httpCodeMessage;
+    private String traceId;
 }
