@@ -1,5 +1,6 @@
 package com.freaky.fit;
 
+import com.freaky.fit.healthcheck.SmokeTest;
 import com.freaky.fit.reositories.UserDetailsrepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class FreakyFitApplication implements CommandLineRunner {
     @Autowired
-    private UserDetailsrepository userDetailsrepository;
+    private SmokeTest smokeTest;
 
     public static void main(String[] args) {
         SpringApplication.run(FreakyFitApplication.class, args);
@@ -17,11 +18,6 @@ public class FreakyFitApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-		/*userDetailsrepository.save(UserDetails.builder()
-				.id(UUID.randomUUID().toString())
-				.name("Sourav")
-				.address("wesx")
-				.phoneNumber("785")
-				.build());*/
+
     }
 }
