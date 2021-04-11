@@ -15,6 +15,7 @@ import java.util.Date;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    public static final String TRACE_ID = "traceId";
 
     @ExceptionHandler({Exception.class})
     public final ResponseEntity<ExceptionResponse> handleException(Exception ex, WebRequest request) {
@@ -45,7 +46,7 @@ public class GlobalExceptionHandler {
                         .details(request.getDescription(false))
                         .message(ex.getMessage())
                         .timestamp(new Date().toString())
-                        .traceId(request.getHeader("TraceId"))
+                        .traceId(request.getHeader(TRACE_ID))
                         .build();
 
         log.error("Runtime Exception Response {}", exceptionResponse);
@@ -60,7 +61,7 @@ public class GlobalExceptionHandler {
                         .details(request.getDescription(false))
                         .message(errorMessage)
                         .timestamp(new Date().toString())
-                        .traceId(request.getHeader("TraceId"))
+                        .traceId(request.getHeader(TRACE_ID))
                         .build();
 
         log.error("Runtime Exception Response {}", exceptionResponse);
