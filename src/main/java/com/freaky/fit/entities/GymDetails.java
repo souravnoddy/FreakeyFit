@@ -7,8 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import java.util.List;
 
 @Data
 @Entity
@@ -20,7 +21,7 @@ public class GymDetails extends AuditableEntity {
     @Id
     private String id;
 
-    private List<String> specialities;
+    private String specialities;
 
     private String area;
 
@@ -37,7 +38,7 @@ public class GymDetails extends AuditableEntity {
     private String owner;
 
     private String remarks;
-
+    @Enumerated(EnumType.STRING)
     private Status status;
 
 

@@ -9,8 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -24,14 +25,14 @@ public class UserDetails extends AuditableEntity {
     @Id
     private String id;
 
-    @NotNull
+
     private String name;
 
     private String phoneNumber;
-    @NotNull
+
     private String email;
 
-    @NotNull
+
     private Date lastLoggedIn;
 
     private Date dob;
@@ -40,7 +41,7 @@ public class UserDetails extends AuditableEntity {
 
     private String longitude;
 
-    @NotNull
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     private String area;
@@ -51,6 +52,7 @@ public class UserDetails extends AuditableEntity {
 
     private String country;
 
-    @NotNull
+
+    @Enumerated(EnumType.STRING)
     private Status status;
 }

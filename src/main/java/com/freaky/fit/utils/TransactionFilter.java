@@ -32,13 +32,6 @@ public class TransactionFilter extends OncePerRequestFilter {
             } else {
                 MDC.put(TRACE_ID, UUID.randomUUID().toString());
             }
-            String authorization = request.getHeader(AUTHORIZATION);
-            if (null != authorization && authorization.contains("Bearer")) {
-                MDC.put(AUTHORIZATION, authorization);
-            } else {
-                MDC.put(AUTHORIZATION, "Bearer " + authorization);
-                log.warn("AUTHORIZATION token not found... Moving ahead..");
-            }
 
         } catch (Exception ex) {
             log.error("Exception in transaction filter", ex);

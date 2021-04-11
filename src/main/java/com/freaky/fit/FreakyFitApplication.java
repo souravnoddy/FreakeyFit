@@ -1,7 +1,6 @@
 package com.freaky.fit;
 
 import com.freaky.fit.healthcheck.SmokeTest;
-import com.freaky.fit.reositories.UserDetailsrepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +17,6 @@ public class FreakyFitApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
+        smokeTest.createDummyUserDetails();
     }
 }
